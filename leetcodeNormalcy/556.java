@@ -61,3 +61,35 @@ class Solution2 {
 		}
     }
 }
+
+
+
+// Different way of converting an integer to a char array
+class Solution3 {
+    public int nextGreaterElement(int n) {
+        char[] number = String.valueOf(n).toCharArray();
+		int len = number.length, i = len - 2, j = len - 1;
+		while (i >= 0 && number[i] >= number[i + 1])
+			i--;
+		if (i == -1)
+			return -1;
+		while (j > i && number[j] <= number[i])
+			j--;
+		number[i] ^= number[j];
+		number[j] ^= number[i];
+		number[i] ^= number[j];
+		i++;
+		j = len - 1;
+		while (i < j) {
+			number[i] ^= number[j];
+			number[j] ^= number[i];
+			number[i++] ^= number[j--];
+		}
+		try {
+			return Integer.valueOf(String.valueOf(number));
+		}
+		catch (NumberFormatException e) {
+			return -1;
+		}
+    }
+}
