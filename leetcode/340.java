@@ -135,6 +135,9 @@ class Node {
 	}
 }
 
+
+
+// Raw implementation of the LinkedHashMap concept
 class Solution4 {
 	
 	Map<Character, Node> map;
@@ -188,6 +191,92 @@ class Solution4 {
 				removeNode(head);
 			}
 			result = Math.max(result, high - low + 1);
+		}
+		return result;
+	}
+}
+
+
+
+/* 
+ * Method of Binary Search :- 
+ * If there exists a result with length i, then result with length j <= i 
+ * exists.
+ * On the contrary, if there is no substring with at most k characters of 
+ * length j <= i, then there is no such substring with length i too.
+ * The maximum possible result is the length of the given string and the minimum 
+ * possible result is 0. 
+ * It implies that binary search can be employed and appropriate answer for 
+ * O(nlog(n)) time and O(k) space can be found out.
+*/
+class Solution5 {
+
+	Map<Character, Integer> charMap = new HashMap<>();
+
+	public boolean substringExists(char[] arr, int mid, int k) {
+		if (arr.length <= k)
+			return true;
+		charMap.clear();
+		for (int i = 0; i < arr.length; i++) {
+			if (i >= mid) {
+				if (charMap.size() <= k)
+					return true;
+				int frequency = charMap.get(arr[i - mid]);
+				if (frequency == 1)
+					charMap.remove(arr[i - mid]);
+				else
+					charMap.put(arr[i - mid], frequency - 1);
+			}
+			charMap.put(arr[i], charMap.getOrDefault(arr[i], 0) + 1);
+		}
+		return charMap.size() <= k;
+	}
+
+	public int lengthOfLongestSubstringKDistinct(String s, int k) {
+		char[] arr = s.toCharArray();
+		int high = arr.length, low = 0, mid, result = 0;
+		while (low <= high) {
+			mid = low + (high - low) / 2;
+			if (substringExists(arr, mid, k)) {
+				result = Math.max(result, mid);
+				low = mid + 1;
+			}
+			else
+				high = mid - 1;
+		}
+		return result;
+	}
+}
+
+
+
+/* 
+ * Using LinkedHashSet -> 
+ * A unique list of characters up to k in number is kept and the most recent 
+ *  
+*/
+class Solution6 {
+	public int lengthOfLongestSubstringKDistinct(String s, int k) {
+		if (k == 0)
+			return 0;
+		LinkedHashSet<Character> set = new LinkedHashSet<>();
+		int length = 0, prevLength = 0, result = 0;
+		char[] charArr = s.toCharArray();
+		int[] index = new int[256];
+		for (int i = 0; i < charArr.length; i++) {
+			if (!set.add(charArr[i])) {
+				set.remove(charArr[i]);
+				set.add(charArr[i]);
+			}
+			length = prevLength + 1;
+			if (set.size() > k) {
+				char toRemove = set.iterator().next();
+				set.remove(toRemove);
+				length = i - index[toRemove];
+			}
+			index[charArr[i]] = i;
+			prevLength = length;
+			result = Math.max(result, length);
 		}
 		return result;
 	}
