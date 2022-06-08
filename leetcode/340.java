@@ -253,7 +253,11 @@ class Solution5 {
 /* 
  * Using LinkedHashSet -> 
  * A unique list of characters up to k in number is kept and the most recent 
- *  
+ * index for each unique character is kept while iterating. 
+ * When the length of characters starts exceeding k, then new length starting 
+ * from the character with the lowest index in the unique list so far is 
+ * computed.
+ * TC = O(n), SC = O(k).
 */
 class Solution6 {
 	public int lengthOfLongestSubstringKDistinct(String s, int k) {
