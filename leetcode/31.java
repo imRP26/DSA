@@ -7,7 +7,7 @@ import java.util.*;
 
 
 // Simple problem involving a similar concept to Monotonic Stacks.
-class Solution1 {
+class Solution {
     public void nextPermutation(int[] nums) {
     	int n = nums.length, i = n - 2, j = n - 1;
 		if (n == 1)
@@ -37,3 +37,10 @@ class Solution1 {
         Arrays.sort(nums, i + 1, n);
     }
 }
+
+
+
+/*
+ * Best Possible Explanation -> 
+ * https://www.nayuki.io/page/next-lexicographical-permutation-algorithm
+ */
