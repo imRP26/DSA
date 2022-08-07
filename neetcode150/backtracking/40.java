@@ -18,6 +18,15 @@ class Solution {
 			return;
 		}
 		for (int i = index; i < candidates.length; i++) {
+			/*
+			 * In order to avoid duplicate combinations, if I've checked 
+			 * candidates[i-1], while candidates[i] == candidates[i - 1], so that 
+			 * can be skipped.
+			 * As an example, if we have target = 14 and candidates - [1, 1, 6, 7], 
+			 * then I've already reached my target by including [1 (the 1st one), 6, 7] 
+			 * and I don't need to include the next 1 now, since that will be a 
+			 * repetition.
+			 */
 			if ((target < candidates[i]) || 
                 (i > index && candidates[i] == candidates[i - 1]))
 				continue;
