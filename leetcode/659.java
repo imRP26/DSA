@@ -26,7 +26,7 @@ class Solution1 {
 				if (subLength < 3)
 					return false;
 			}
-			// Case 2 - Creating of a new subsequence
+			// Case 2 - Creation of a new subsequence
 			if (subs.isEmpty() || subs.peek()[1] == num)
 				subs.add(new int[] {num, num});
 			else {
