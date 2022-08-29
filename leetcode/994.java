@@ -68,7 +68,7 @@ class Solution2 {
         }
         if (countFresh == 0)
             return 0;
-        int count = 0;
+        int count = -1;
         int[][] directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
         while (!queue.isEmpty()) {
             count++;
@@ -85,6 +85,6 @@ class Solution2 {
                 }
             }
         }
-        return countFresh == 0 ? count - 1 : -1;
+        return countFresh == 0 ? count : -1;
     }
 }

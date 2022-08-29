@@ -57,10 +57,11 @@ class Solution2 { // TC = O(n * log(n))
 // Another slightly similar concept - TC = O(N * log(N))
 class Solution3 {
     public boolean isPossibleDivide(int[] nums, int k) {
-        TreeMap<Integer, Integer> map = new TreeMap<>();
+        Map<Integer, Integer> map = new TreeMap<>();
         for (int num : nums)
             map.put(num, map.getOrDefault(num, 0) + 1);
         while (!map.isEmpty()) {
+            // pollFirstEntry() - returns and deletes the 1st pair
             Map.Entry<Integer, Integer> entry = map.pollFirstEntry();
             int key = entry.getKey(), value = entry.getValue();
             for (int key1 = key + 1; key1 < key + k; key1++) {
