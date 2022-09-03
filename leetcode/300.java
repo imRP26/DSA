@@ -104,7 +104,7 @@ class Solution {
 
 /*
  * Greedy + Binary Search :- 
- * Refer to Striver's video.
+ * Refer to Striver's video. - already done in 354 - Russian Doll Envelopes
  */
 class Solution3 {
     public int lengthOfLIS(int[] nums) {
