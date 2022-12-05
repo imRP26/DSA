@@ -4,7 +4,7 @@ import java.util.*;
 
 
 /*
- * Simple, Greedy
+ * Simple, Greedy -> 1611
  */
 class Codechef {
 
