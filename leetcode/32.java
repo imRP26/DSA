@@ -46,3 +46,27 @@ class Solution1 {
  * If s[i] == ')' and s[i - 1] = ')' and if s[i - dp[i - 1] - 1] = '(', then 
  * dp[i] = dp[i - 1] + dp[i - dp[i - 1] - 2] + 2.
  */
+
+
+
+/*
+ * Referenced from -> https://www.youtube.com/watch?v=zhsjU1Bh9jQ
+ */
+class Solution2 {
+    public int longestValidParentheses(String s) {
+        Stack<Integer> stack = new Stack<>();
+        int len = s.length(), result = 0, index = -1;
+        for (int i = 0; i < len; i++) {
+            if (!stack.isEmpty() && s.charAt(i) == ')' && s.charAt(stack.peek()) == '(')
+                stack.pop();
+            else
+                stack.push(i);
+        }
+        for (int i : stack) {
+            result = Math.max(result, i - index - 1);
+            index = i;
+        }
+        result = Math.max(result, len - index - 1);
+        return result;
+    }
+}
