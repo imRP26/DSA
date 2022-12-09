@@ -1,8 +1,5 @@
 import java.util.*;
-<<<<<<< HEAD
 import javafx.util.Pair;
-=======
->>>>>>> 780bea96af145cea4ceff0ddaf2d8278a3b4a171
 
 /*
  * https://leetcode.com/problems/word-ladder/
@@ -10,13 +7,8 @@ import javafx.util.Pair;
 
 
 
-<<<<<<< HEAD
 // My Naive Solution - BFS
 class Solution1 {
-=======
-// My Naive BFS
-class Solution {
->>>>>>> 780bea96af145cea4ceff0ddaf2d8278a3b4a171
     
     boolean computeDiff(String str1, String str2) {
         int numDiff = 0;
@@ -55,13 +47,8 @@ class Solution {
 
 
 
-<<<<<<< HEAD
 // Same concept, but a different approach
 class Solution2 {
-=======
-// Another approach of the same concept as above
-class Solution {
->>>>>>> 780bea96af145cea4ceff0ddaf2d8278a3b4a171
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         Set<String> wordSet = new HashSet<>(wordList);
         if (!wordSet.contains(endWord))
@@ -97,7 +84,6 @@ class Solution {
 
 
 
-<<<<<<< HEAD
 /*
  * 2-end BFS Approach :-
  * The idea behind bidirectional search is to run 2 simultaneous searches - 1 
@@ -143,6 +129,3 @@ class Solution3 {
         return 0;
     }
 }
-=======
-// Need to understand the 2-end BFS approach - seems tough as of now!!
->>>>>>> 780bea96af145cea4ceff0ddaf2d8278a3b4a171
