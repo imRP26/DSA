@@ -71,3 +71,11 @@ class Solution {
         return scoreCount.get(maxProd);
     }
 }
+
+
+
+/*
+ * Alternative Solution referenced from here :- 
+ * https://leetcode.com/problems/count-nodes-with-the-highest-score/solutions/1538012/intuitive-java-solution-faster-than-100/
+ */
+
