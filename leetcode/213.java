@@ -15,7 +15,7 @@ class Solution {
 			robber1 = robber2;
 			robber2 = temp;
 		}
-		return rob2;
+		return robber2;
 	}
     
     public int rob(int[] nums) {
