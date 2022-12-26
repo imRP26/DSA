@@ -87,3 +87,23 @@ class Solution3 {
         return -1;
     }
 }
+
+
+
+/*
+ * Greedy based Solution, referenced from 
+ * https://leetcode.com/problems/jump-game-ii/solutions/18014/concise-o-n-one-loop-java-solution-based-on-greedy/
+ */
+class Solution4 {
+    public int jump(int[] nums) {
+        int jumps = 0, currentEnd = 0, currentFarthest = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            currentFarthest = Math.max(currentFarthest, i + nums[i]);
+            if (i == currentEnd) {
+                jumps++;
+                currentEnd = currentFarthest;
+            }
+        }
+        return jumps;
+    }
+}
