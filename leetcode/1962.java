@@ -10,6 +10,7 @@
 class Solution {
     public int minStoneSum(int[] piles, int k) {
         PriorityQueue<Integer> minPQ = new PriorityQueue<>(Collections.reverseOrder());
+        //PriorityQueue<Integer> minPQ = new PriorityQueue<>((a, b) -> b - a);
         for (int i = 0; i < piles.length; i++) {
             if (piles[i] != 0)
                 minPQ.add(piles[i]);
