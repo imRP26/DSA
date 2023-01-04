@@ -5,7 +5,7 @@
 
 
 /*
- * https://leetcode.com/problems/max-consecutive-ones-iii/
+ * Happy!!
  */
 class Solution {
     public int longestOnes(int[] nums, int k) {
