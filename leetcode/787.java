@@ -5,7 +5,6 @@
 
 
 /*
- * 2 very very good links that are to be followed for reference :-
  * My approach of BFS, in line with Striver's approach as mentioned in his video
  */
 class Solution1 {
