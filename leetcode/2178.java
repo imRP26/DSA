@@ -6,6 +6,7 @@
 
 /*
  * I AM NOT NON-TECHNICAL FFS!!!
+ * FWIW, Greedy + Prefix Sums
  */
 class Solution {
     public List<Long> maximumEvenSplit(long finalSum) {
