@@ -105,3 +105,42 @@ class Solution {
         return result;
     }
 }
+
+
+
+/*
+ * Awesomely Simple DFS Solution
+ */
+class Solution {
+
+	private int rows, columns;
+
+	private void dfs(int x, int y, int[][] grid) {
+		if (x >= 0 && x < rows && y >= 0 && y < columns && grid[x][y] == 1) {
+			grid[x][y] = 0;
+			dfs(x + 1, y, grid);
+			dfs(x - 1, y, grid);
+			dfs(x, y + 1, grid);
+			dfs(x, y - 1, grid);
+		}
+	}
+
+	public int numEnclaves(int[][] grid) {
+		rows = grid.length;
+		columns = grid[0].length;
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < columns; j++) {
+				if (i == 0 || j == 0 || i == rows - 1 || j == columns - 1)
+					dfs(i, j, grid);
+			}
+		}
+		int result = 0
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < columns; j++) {
+				if (grid[i][j] == 1)
+					result++;
+			}
+		}
+		return result;
+	}
+}
