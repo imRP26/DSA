@@ -134,7 +134,7 @@ class Solution {
 					dfs(i, j, grid);
 			}
 		}
-		int result = 0
+		int result = 0;
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
 				if (grid[i][j] == 1)
