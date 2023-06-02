@@ -1,7 +1,13 @@
 /*
+ * https://leetcode.com/problems/detonate-the-maximum-bombs/
+ */
+
+
+
+/*
  * Generic graph construction and then BFS
  */
-class Solution1 {
+class Solution {
 
     private int bfs(int src, int nodes, Map<Integer, List<Integer> > map) {
         boolean[] visited = new boolean[nodes];
@@ -52,10 +58,11 @@ class Solution1 {
 }
 
 
+
 /*
  * Same bloody way of doing the above thing
  */
-class Solution2 {
+class Solution {
 
     private int bfs(int src, int nodes, Map<Integer, List<Integer> > map) {
         boolean[] visited = new boolean[nodes];
@@ -101,6 +108,87 @@ class Solution2 {
         }
         for (int i = 0; i < n; i++)
             result = Math.max(result, bfs(i, n, map));
+        return result;
+    }
+}
+
+
+
+/*
+ * Approach of Recursive DFS from Official LC Editorial
+ */
+class Solution {
+	
+	private Map<Integer, List<Integer> > graph = new HashMap<>();
+	
+	private int dfs(int src, Set<Integer> visited) {
+		visited.add(src);
+		int count = 1;
+		for (int neighbor : graph.getOrDefault(src, new ArrayList<>())) {
+			if (!visited.contains(neighbor))
+				count += dfs(neighbor, visited);
+		}
+		return count;
+	}
+	
+	public int maximumDetonation(int[][] bombs) {
+		int n = bombs.length;
+		for (int i = 0; i < n; i++) {
+			int xi = bombs[i][0], yi = bombs[i][1], ri = bombs[i][2];
+			for (int j = 0; j < n; j++) {
+				if (i == j)
+					continue;
+				int xj = bombs[j][0], yj = bombs[j][1];
+				if ((long)ri * ri >= (long)(xi - xj) * (xi - xj) + (long)(yi - yj) * (yi - yj))
+					graph.computeIfAbsent(i, k -> new ArrayList<>()).add(j); 
+			}
+		}
+		int result = 0;
+		for (int i = 0; i < n; i++)
+			result = Math.max(result, dfs(i, new HashSet<>()));
+        return result;
+	}
+}
+
+
+
+/*
+ * Approach of Iterative DFS from official LC Editorial
+ */
+class Solution {
+
+    private Map<Integer, List<Integer> > graph = new HashMap<>();
+
+    private int dfs(int src) {
+        Stack<Integer> st = new Stack<>();
+        Set<Integer> visited = new HashSet<>();
+        st.push(src);
+        visited.add(src);
+        while (!st.isEmpty()) {
+            src = st.pop();
+            for (int neib : graph.getOrDefault(src, new ArrayList<>())) {
+                if (!visited.contains(neib)) {
+                    visited.add(neib);
+                    st.push(neib);
+                }
+            }
+        }
+        return visited.size();
+    }
+
+    public int maximumDetonation(int[][] bombs) {
+        int n = bombs.length, result = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int xi = bombs[i][0], yi = bombs[i][1], ri = bombs[i][2], xj = bombs[j][0], yj = bombs[j][1], rj = bombs[j][2];
+                if ((long)ri * ri >= (long)(xi - xj) * (xi - xj) + (long)(yi - yj) * (yi - yj))
+                    graph.computeIfAbsent(i, k -> new ArrayList<>()).add(j);
+                if ((long)rj * rj >= (long)(xj - xi) * (xj - xi) + (long)(yj - yi) * (yj - yi))
+                    graph.computeIfAbsent(j, k -> new ArrayList<>()).add(i);
+            }
+        }
+        for (int i = 0; i < n; i++)
+            result = Math.max(result, dfs(i));
         return result;
     }
 }
