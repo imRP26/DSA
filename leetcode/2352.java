@@ -34,6 +34,9 @@ class Solution {
 
 /*
  * Approach 2 of Hashing from -> https://leetcode.com/problems/equal-row-and-column-pairs/editorial/
+ * TC = O(N^2)
+ * For reference purposes -> 
+ * https://www.geeksforgeeks.org/difference-between-arrays-tostring-and-arrays-deeptostring-in-java/
  */
 class Solution {
     public int equalPairs(int[][] grid) {
@@ -48,6 +51,58 @@ class Solution {
             for (int i = 0; i < rows; i++)
                 gridCol[i] = grid[i][j];
             res += map.getOrDefault(Arrays.toString(gridCol), 0);
+        }
+        return res;
+    }
+}
+
+
+
+/*
+ * Approach 3 of Trie from -> https://leetcode.com/problems/equal-row-and-column-pairs/editorial/
+ */
+class Solution {
+
+    class TrieNode {
+        int count;
+        Map<Integer, TrieNode> children;
+        public TrieNode() {
+            this.count = 0;
+            this.children = new HashMap<>();
+        }
+    }
+
+    TrieNode root = new TrieNode();
+
+    private void insert(int[] arr) {
+        TrieNode currNode = root;
+        for (int a : arr) {
+            if (!currNode.children.containsKey(a))
+                currNode.children.put(a, new TrieNode());
+            currNode = currNode.children.get(a);
+        }
+        currNode.count += 1;
+    }
+
+    private int search(int[] arr) {
+        TrieNode currNode = root;
+        for (int a : arr) {
+            if (!currNode.children.containsKey(a))
+                return 0;
+            currNode = currNode.children.get(a);
+        }
+        return currNode.count;
+    }
+
+    public int equalPairs(int[][] grid) {
+        int res = 0, n = grid.length;
+        int[] colArray = new int[n];
+        for (int[] row : grid)
+            insert(row);
+        for (int j = 0; j < n; j++) {
+            for (int i = 0; i < n; i++)
+                colArray[i] = grid[i][j];
+            res += search(colArray);
         }
         return res;
     }
