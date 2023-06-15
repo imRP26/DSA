@@ -24,6 +24,6 @@ public class Main {
         }
         for (int i = 1; i <= nodes; i++)
             res = Math.max(res, helper(i, parent));
-        System.out.println(res);
+        System.out.println(res); 
     }
 }
