@@ -11,6 +11,10 @@
 class Solution {
 
     private int sz = (int)1e5 + 5; 
+    /*
+     * Here, the segment tree is used to keep track of the maximum length of all the 
+     * valid numbers that can come before the current number in consideration.
+     */
     private int[] segtree = new int[4 * sz];
 
     private int query(int i, int queryLeft, int queryRight, int left, int right) {
