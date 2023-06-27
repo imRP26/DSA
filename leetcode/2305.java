@@ -43,6 +43,8 @@ class Solution {
 /*
  * Approach 2 of DP with Bitmasking from -> 
  * https://leetcode.com/problems/fair-distribution-of-cookies/solutions/2144128/all-solutions-o-3-n-o-4-n-o-k-n-explained/
+ * Very important explanation step -> 
+ * https://leetcode.com/problems/fair-distribution-of-cookies/solutions/2144128/all-solutions-o-3-n-o-4-n-o-k-n-explained/comments/1508536
  */
 class Solution {
 
@@ -85,6 +87,8 @@ class Solution {
 /*
  * Approach 2 of DP with Bitmasking from -> 
  * https://leetcode.com/problems/fair-distribution-of-cookies/solutions/2144128/all-solutions-o-3-n-o-4-n-o-k-n-explained/
+ * Very important explanation step -> 
+ * https://leetcode.com/problems/fair-distribution-of-cookies/solutions/2144128/all-solutions-o-3-n-o-4-n-o-k-n-explained/comments/1508536
  */
 class Solution {
 
