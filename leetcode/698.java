@@ -193,4 +193,27 @@ class Solution {
 /*
  * Approach 5 of Tabulation + Bitmasking from LC Official Editorial!
  */
-
+class Solution {
+    public boolean canPartitionKSubsets(int[] nums, int k) {
+        int targetSum = 0, n = nums.length;
+        for (int num : nums)
+            targetSum += num;
+        if (targetSum % k != 0)
+            return false;
+        targetSum /= k;
+        int[] subsetSum = new int[(1 << n)];
+        Arrays.fill(subsetSum, -1);
+        subsetSum[0] = 0; // when nothing is picked
+        for (int bitmask = 0; bitmask < (1 << n); bitmask++) {
+            if (subsetSum[bitmask] == -1)
+                continue;
+            for (int i = 0; i < n; i++) {
+                if ((bitmask & (1 << i)) == 0 && subsetSum[bitmask] + nums[i] <= targetSum)
+                    subsetSum[bitmask | (1 << i)] = (subsetSum[bitmask] + nums[i]) % targetSum;
+            }
+            if (subsetSum[(1 << n) - 1] == 0)
+                return true;
+        }
+        return subsetSum[(1 << n) - 1] == 0;
+    }
+}
