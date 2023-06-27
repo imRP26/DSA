@@ -140,7 +140,7 @@ class Solution {
 
 
 /*
- * Approach 4 of Backtracking + Memoization + Bitmasking from LC Official Editorial
+ * Approach 4 of Backtracking + DP with Memoization + Bitmasking from LC Official Editorial
  */
 class Solution {
 

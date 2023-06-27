@@ -32,3 +32,10 @@ class Solution {
         return nums[low];
     }
 }
+
+
+
+/*
+ * Refer to Striver's explanation!
+ */
+
