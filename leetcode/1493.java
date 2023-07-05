@@ -48,3 +48,38 @@ class Solution {
         return longestWindow;
     }
 }
+
+
+
+/*
+ * DP Approach from -> 
+ * https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/solutions/708475/dynamic-programming-approach-o-n-time-o-1-space-with-explanation-c/
+ */
+class Solution {
+    public int longestSubarray(int[] nums) {
+        /*
+         * dp1[i] = length of the longest subarray ending at nums[i] with all 1s, with 1 deletion used.
+         * dp0[i] = length of the longest subarray ending at nums[i] with all 1s, with 0 deletions used.
+         * Transition Functions :-
+         * (1) if nums[i] == 0:
+         *         dp1[i] = dp0[i - 1]
+         *         dp0[i] = 0
+         * (2) if nums[i] == 1:
+         *         dp1[i] = max(1 + dp1[i - 1], dp0[i - 1])
+         *         dp0[i] = 1 + dp0[i - 1]
+         */
+        int dp1 = 0, dp0 = (nums[0] == 1) ? 1 : 0, res = Integer.MIN_VALUE;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                dp1 = dp0;
+                dp0 = 0;
+            }
+            else {
+                dp1 = Math.max(1 + dp1, dp0);
+                dp0 = 1 + dp0;
+            }
+            res = Math.max(res, dp1);
+        }
+        return (res == Integer.MIN_VALUE) ? 0 : res;
+    }
+}
