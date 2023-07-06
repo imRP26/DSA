@@ -115,4 +115,27 @@ class Solution {
  * Approach of Priority Queue from -> 
  * https://leetcode.com/problems/swim-in-rising-water/solutions/965631/java-3-clean-codes-dijkstra-s-algo-priorityqueue-and-binary-search/
  */
-
+class Solution {
+    public int swimInWater(int[][] grid) {
+        int n = grid.length;
+		int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+		boolean[][] vis = new boolean[n][n];
+		PriorityQueue<int[]> minPQ = new PriorityQueue<>((a, b) -> (a[2] - b[2]));
+		minPQ.offer(new int[] {0, 0, grid[0][0]});
+		vis[0][0] = true;
+		while (!minPQ.isEmpty()) {
+			int[] temp = minPQ.poll();
+			for (int[] d : dirs) {
+				int x = d[0] + temp[0], y = d[1] + temp[1];
+				if (x >= 0 && x < n && y >= 0 && y < n && !vis[x][y]) {
+					vis[x][y] = true;
+					int t = Math.max(temp[2], grid[x][y]);
+					if (x == n - 1 && y == n - 1)
+						return t;
+					minPQ.offer(new int[] {x, y, t});
+				}
+			}
+		}
+		return 0;
+    }
+}
