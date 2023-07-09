@@ -109,4 +109,22 @@ class Solution {
 /*
  * An improvement upon the previous approach from LC Official Editorial
  */
-
+class Solution {
+    public int maxConsecutiveAnswers(String answerKey, int k) {
+        int res = 0;
+        Map<Character, Integer> counts = new HashMap<>();
+        for (int high = 0; high < answerKey.length(); high++) {
+            char c = answerKey.charAt(high);
+            counts.put(c, counts.getOrDefault(c, 0) + 1);
+            int minorCount = Math.min(counts.getOrDefault('T', 0), counts.getOrDefault('F', 0));
+            if (minorCount <= k)
+                res++;
+            else {
+                char ch = answerKey.charAt(high - res);
+                counts.put(ch, counts.get(ch) - 1);
+            }
+    
+        }
+        return res;
+    }
+}
