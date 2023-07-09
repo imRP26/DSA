@@ -1,35 +1,30 @@
-import java.util.*;
-
 /* 
- * Question Link -> 
  * https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/
-*/
+ */
 
 
 
 // My O(N) TC, O(K) SC based solution
-class Solution1 {
+class Solution {
     public int lengthOfLongestSubstringKDistinct(String s, int k) {
-        int low = 0, high = 0, result = 0, n = s.length();
+        if (k == 0)
+            return 0;
         Map<Character, Integer> map = new HashMap<>();
-        for (high = 0; high < n; high++) {
-            while (map.size() > k) {
+        int low = 0, high = 0, res = 0;
+        while (high < s.length()) {
+            char c = s.charAt(high);
+            map.put(c, map.getOrDefault(c, 0) + 1);
+            while (low < high && map.size() > k) {
                 char ch = s.charAt(low);
-                if (map.get(ch) == 1)
+                map.put(ch, map.getOrDefault(ch, 0) - 1);
+                if (map.get(ch) == 0)
                     map.remove(ch);
-                else
-                    map.put(ch, map.get(ch) - 1);
                 low++;
             }
-            char ch = s.charAt(high);
-            if (map.containsKey(ch))
-                map.put(ch, map.get(ch) + 1);
-            else
-                map.put(ch, 1);
-            if (map.size() <= k)
-                result = Math.max(result, high - low + 1);
+            res = Math.max(res, high - low + 1);
+            high++;
         }
-        return result;
+        return res;
     }
 }
 
@@ -45,8 +40,8 @@ class Solution1 {
  * "s.charAt(leftPointer)".
  * Thence, the key idea is that we can't assume any portion of the input string is 
  * stored in memory.
-*/
-class Solution2 {
+ */
+class Solution {
     public int lengthOfLongestSubstringKDistinct(String s, int k) {
 		if (k == 0)
 			return 0;
@@ -55,7 +50,7 @@ class Solution2 {
 		/*
 		 * for keeping track of each character in the current window and the position  
 		 * of its last occurence 
-		*/
+		 */
 		Map<Character, Integer> inWindow = new HashMap<>();
 		int low = 0, high, result = 1, n = s.length();
 		for (high = 0; high < n; high++) {
@@ -81,7 +76,7 @@ class Solution2 {
 
 
 // Solution using LinkedHashMap
-class Solution3 {
+class Solution {
 	public int lengthOfLongestSubstringKDistinct(String s, int k) {
 		if (k == 0)
 			return 0;
@@ -100,7 +95,7 @@ class Solution3 {
 				 * map.keySet() returns a set view of the keys contained in this map.
 				 * map.keySet().iterator().next() gives the leftmost index among all the 
 				 * latest / rightmost indices of all the unique chars in the sliding window.
-				*/
+				 */
 				ch = map.keySet().iterator().next(); // O(1)
 				/*
 				 * Iterator<K> itr = map.keySet().iterator();
@@ -109,7 +104,7 @@ class Solution3 {
 			     *     V value = map.get(key);
 			     *     System.out.println(key + " = " + value);
 		         * }
-				*/
+				 */
 				low = map.get(ch) + 1;
 				map.remove(ch);
 			}
@@ -122,27 +117,20 @@ class Solution3 {
 
 
 // Method of LRU cache - just an expanded version of LinkedHashMap
-class Node {
+class Solution {
 	
-	Node next;
-	Node previous;
-	int position;
-	char ch;
-
-	Node(char ch, int position) {
-		this.ch = ch;
-		this.position = position;
+	class Node {
+		Node next, previous;
+		int position;
+		char ch;
+		Node(char ch, int position) {
+			this.ch = ch;
+			this.position = position;
+		}
 	}
-}
 
-
-
-// Raw implementation of the LinkedHashMap concept
-class Solution4 {
-	
-	Map<Character, Node> map;
-	Node head;
-	Node tail;
+	Map<Character, Node> map = new HashMap<>();
+	Node head, tail;
 
 	public Node removeNode(Node node) {
 		map.remove(node.ch);
@@ -172,7 +160,6 @@ class Solution4 {
 	}
 
 	public int lengthOfLongestSubstringKDistinct(String s, int k) {
-		map = new HashMap<>();
 		int result = 0, low = 0, high, n = s.length();
 		for (high = 0; high < n; high++) {
 			char currChar = s.charAt(high);
@@ -209,7 +196,7 @@ class Solution4 {
  * It implies that binary search can be employed and appropriate answer for 
  * O(nlog(n)) time and O(k) space can be found out.
 */
-class Solution5 {
+class Solution {
 
 	Map<Character, Integer> charMap = new HashMap<>();
 
@@ -259,7 +246,7 @@ class Solution5 {
  * computed.
  * TC = O(n), SC = O(k).
 */
-class Solution6 {
+class Solution {
 	public int lengthOfLongestSubstringKDistinct(String s, int k) {
 		if (k == 0)
 			return 0;
