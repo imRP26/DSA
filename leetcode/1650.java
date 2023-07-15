@@ -66,6 +66,7 @@ class Solution {
 /*
  * Approach 3 from -> 
  * https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree-iii/solutions/950242/multiple-solution-approaches-in-java-with-comments-and-explanation/
+ * Approach 3 of LC Editorial of LC160
  */
 class Solution {
     public Node lowestCommonAncestor(Node p, Node q) {
