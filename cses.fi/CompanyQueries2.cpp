@@ -66,3 +66,71 @@ int main() {
 		cout << lca(u, v) << endl;
 	}
 }
+
+
+
+
+/*
+ * ALTERNATE METHOD :- using the in-out time trick
+ */
+/*
+#include <bits/stdc++.h>
+using namespace std;
+
+int n, t = 0;
+vector<int> inTime, outTime;
+vector<vector<int> > graph, kthParent;
+
+void dfs(int node, int parent) {
+    kthParent[0][node] = parent;
+	inTime[node] = t++;
+	for (int child : graph[node])
+		dfs(child, node);
+	outTime[node] = t++;
+}
+
+bool isAncestor(int x, int y) {
+	if (x == -1 || y == -1)
+		return 1;
+	return inTime[x] <= inTime[y] && outTime[x] >= outTime[y];
+}
+
+int lca(int x, int y) {
+	if (isAncestor(x, y))
+		return x;
+	if (isAncestor(y, x))
+		return y;
+	for (int k = log2(n); k >= 0; k--) {
+		int xPar = kthParent[k][x];
+		if (!isAncestor(xPar, y))
+			x = xPar;
+	}
+	return kthParent[0][x];
+}
+
+int main() {
+	int q, u, v;
+	cin >> n >> q;
+	graph.resize(n + 1);
+	for (int i = 2; i <= n; i++) {
+		cin >> u;
+		graph[u].push_back(i);
+	}
+	inTime.resize(n + 1, 0);
+	outTime.resize(n + 1, 0);
+	kthParent.resize(log2(n) + 1);
+	for (int i = 0; i <= log2(n); i++)
+		kthParent[i].resize(n + 1, -1);
+	dfs(1, -1);
+	for (int j = 1; j <= log2(n); j++) {
+		for (int i = 1; i <= n; i++) {
+			int intermediate = kthParent[j - 1][i];
+			kthParent[j][i] = (intermediate == -1) ? -1 : kthParent[j - 1][intermediate];
+		}
+	}
+	while (q--) {
+		cin >> u >> v;
+		cout << lca(u, v) << endl;
+	}
+}
+ */
