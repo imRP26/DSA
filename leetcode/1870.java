@@ -6,7 +6,7 @@
 
 /*
  * Approach of Binary Search from LC Official Editorial!
- * Since trains can only leave in integral hours, its important to take Math.ceil, except for the 
+ * Since trains can only leave in integral hours, its important to take Math.ceil(), except for the 
  * last train ride.
  */
 class Solution {
