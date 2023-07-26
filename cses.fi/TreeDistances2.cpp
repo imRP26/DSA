@@ -20,7 +20,7 @@ using namespace std;
  *                    assuming that the subtree is rooted at node no. 'i'.
  *                  = summation over (subtreeAnswer[ci] + numNodesInSubtree[ci]) over all i.
  * numNodesInSubtree[i] = number of nodes in the subtree rooted at node no. 'i'.
- * partialAnswer(1 | ci) = sum of the distances of all the nodes rom node no. 1 other 
+ * partialAnswer(1 | ci) = sum of the distances of all the nodes from node no. 1 other 
  *                         than the nodes that belong to the subtree rooted at ci.
  *                       = res[1] - subtreeAnswer[ci] - numNodesInSubtree[ci]
  * res[ci] = subtreeAnswer[ci] + partialAnswer[1 | ci] + (total no. of nodes in the tree - numNodesInSubtree[ci])
