@@ -4,7 +4,6 @@
 import java.io.*;
 import java.util.*;
 
-
 class GridPaths {
 
 	private static char[][] grid;
