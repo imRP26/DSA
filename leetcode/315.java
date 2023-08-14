@@ -59,3 +59,62 @@ class Solution {
         return res;
     }
 }
+
+
+
+/*
+ * Same Approach as above, but merge sort has been done in ascending order!
+ */
+class Solution {
+
+    private int[][] arr;
+    private List<Integer> res = new ArrayList<>();
+
+    private void merge(int low, int mid, int high) {
+        int[][] temp = new int[high - low + 1][2];
+        /*
+         * count of inversions for each element in the left subarray needs to be stored, otherwise 
+         * when we increment the 'i' pointer, we forget the previously encountered inversions!
+         */
+        int i = low, j = mid + 1, k = 0, count = 0;
+        while (i <= mid && j <= high) {
+            if (arr[i][0] <= arr[j][0]) {
+                res.set(arr[i][1], res.get(arr[i][1]) + count);
+                temp[k++] = arr[i++];
+            }
+            else {
+                count++;
+                temp[k++] = arr[j++];
+            }
+        }
+        while (i <= mid) {
+            res.set(arr[i][1], res.get(arr[i][1]) + count);
+            temp[k++] = arr[i++];
+        }
+        while (j <= high)
+            temp[k++] = arr[j++];
+        for (i = low; i <= high; i++)
+            arr[i] = temp[i - low];
+    }
+
+    private void mergeSort(int low, int high) {
+        if (low >= high)
+            return;
+        int mid = low + (high - low) / 2;
+        mergeSort(low, mid);
+        mergeSort(mid + 1, high);
+        merge(low, mid, high);
+    }
+
+    public List<Integer> countSmaller(int[] nums) {
+        int n = nums.length;
+        arr = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            res.add(0);
+            arr[i][0] = nums[i];
+            arr[i][1] = i;
+        }
+        mergeSort(0, n - 1);
+        return res;
+    }
+}
