@@ -1,6 +1,6 @@
 /*
- * Question Link -> https://leetcode.com/problems/trapping-rain-water/
- * // if any doubt arises, refer to Neetcode's video. Peas!!
+ * https://leetcode.com/problems/trapping-rain-water/
+ * Refer to Striver's videos!
 */
 
 
