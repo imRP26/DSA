@@ -64,7 +64,7 @@ class Solution {
                 maxFreqChar = i;
             }
         }
-        if (maxFreq > len / 2)
+        if (maxFreq > (len + 1) / 2)
             return "";
         char[] res = new char[len];
         int idx = 0;
