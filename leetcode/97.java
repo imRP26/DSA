@@ -1,5 +1,3 @@
-import java.util.*;
-
 /*
  * https://leetcode.com/problems/interleaving-string/
  */
@@ -13,26 +11,43 @@ import java.util.*;
  * Only need to cache invalid[i][j] since in most of the cases s1[0 - i] and 
  * s2[0 - j] doesn't form s3[0 - k].
  */
-class Solution1 {
+class Solution {
 
-    boolean dfs(char[] c1, char[] c2, char[] c3, int i, int j, int k, boolean[][] invalid) {
-        if (invalid[i][j])
-            return false;
+    /*
+     * DP State :-
+     * dp[i][j] = TRUE, if s1[0 : i] and s2[0 : j] can together form s3[0 : k].
+     *          = FALSE, otherwise.
+     *
+     * DP Transitions :-
+     * dp[i][j] = dp[i + 1][j] || dp[i][j + 1]
+     * 
+     * Final Answer :-
+     * dp[0][0]
+     */
+
+    private char[] c1, c2, c3;
+    private Boolean[][] isValid;
+
+    private boolean memoization(int i, int j, int k) {
         if (k == c3.length)
             return true;
-        boolean valid = i < c1.length && c1[i] == c3[k] && dfs(c1, c2, c3, i + 1, j, k + 1, invalid) || 
-                        j < c2.length && c2[j] == c3[k] && dfs(c1, c2, c3, i, j + 1, k + 1, invalid);
-        if (!valid)
-            invalid[i][j] = true;
-        return valid;
+        if (isValid[i][j] != null)
+            return isValid[i][j];
+        boolean validity = (i < c1.length && c1[i] == c3[k] && memoization(i + 1, j, k + 1)) || 
+                           (j < c2.length && c2[j] == c3[k] && memoization(i, j + 1, k + 1));
+        return isValid[i][j] = validity;
     }
 
     public boolean isInterleave(String s1, String s2, String s3) {
-        char[] c1 = s1.toCharArray(), c2 = s2.toCharArray(), c3 = s3.toCharArray();
-        int m = s1.length(), n = s2.length();
-        if (m + n != s3.length())
+        int len1 = s1.length(), len2 = s2.length();
+        if (len1 + len2 != s3.length())
             return false;
-        return dfs(c1, c2, c3, 0, 0, 0, new boolean[m + 1][n + 1]);
+        c1 = s1.toCharArray();
+        c2 = s2.toCharArray();
+        c3 = s3.toCharArray();
+        isValid = new Boolean[len1 + 1][len2 + 1];
+        isValid[len1][len2] = false;
+        return memoization(0, 0, 0);
     }
 }
 
