@@ -112,41 +112,36 @@ class Solution3 {
  * BFS Solution Intuition -> 
  * https://leetcode.com/problems/interleaving-string/discuss/31904/Summary-of-solutions-BFS-DFS-DP
  */
-class Solution4 {
+class Solution {
     public boolean isInterleave(String s1, String s2, String s3) {
         int len1 = s1.length(), len2 = s2.length(), len3 = s3.length();
         if (len1 + len2 != len3)
             return false;
-        Deque<Integer> deque = new LinkedList<>();
-        int matched = 0;
-        deque.offer(0);
-        Set<Integer> set = new HashSet<>();
-        while (!deque.isEmpty() && matched < len3) {
-            int size = deque.size();
-            for (int i = 0; i < size; i++) {
-                int p1 = deque.peek() / len3, p2 = deque.peek() % len3;
-                deque.poll();
-                /*
-                 * we can represent a position in a matrix as (y * width + x) or 
-                 * (x * height + y).
-                 */
-                if (p1 < len1 && s1.charAt(p1) == s3.charAt(matched)) {
-                    int key = (p1 + 1) * len3 + p2;
-                    if (!set.contains(key)) {
-                        set.add(key);
-                        deque.offer(key);
-                    }
-                }
-                if (p2 < len2 && s2.charAt(p2) == s3.charAt(matched)) {
-                    int key = p1 * len3 + (p2 + 1);
-                    if (!set.contains(key)) {
-                        set.add(key);
-                        deque.offer(key);
-                    }
-                }
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[] {0, 0});
+        q.offer(new int[] {-1, -1});
+        int k = 0;
+        boolean[][] vis = new boolean[len1 + 1][len2 + 1];
+        while (!q.isEmpty() && k < len3) {
+            int[] temp = q.poll();
+            int i = temp[0], j = temp[1];
+            if (i >= len1 || j >= len2)
+                continue;
+            if (i == -1) {
+                if (q.isEmpty())
+                    break;
+                q.offer(new int[] {-1, -1});
+                k++;
+                continue;
             }
-            matched++;
+            if (vis[i][j])
+                continue;
+            vis[i][j] = true;
+            if (i < len1 && !vis[i + 1][j] && s1.charAt(i) == s3.charAt(k))
+                q.offer(new int[] {i + 1, j});
+            if (j < len2 && !vis[i][j + 1] && s2.charAt(j) == s3.charAt(k))
+                q.offer(new int[] {i, j + 1});
         }
-        return !deque.isEmpty() && matched == len3;
+        return k == len3;
     }
 }
