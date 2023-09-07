@@ -81,7 +81,6 @@ class Solution {
     public int minOperations(List<Integer> nums, int target) {
         int[] counts = new int[32];
         long totalSum = 0;
-        int res = 0, idx = 0;
         for (int n : nums) {
             totalSum += n;
             for (int i = 0; i < 32; i++) {
@@ -93,16 +92,18 @@ class Solution {
         }
         if (totalSum < target)
             return -1;
+        int idx = 0, res = 0;
         while (idx < 32) {
             if (((1 << idx) & target) != 0) {
-                if (counts[idx] > 0)
+                if (counts[idx] > 0) // corresponding bit set in target
                     counts[idx]--;
-                else {
-                    while (idx < 31 && counts[idx] == 0) {
-                        idx++;
+                else { // corresponding bit not set in target
+                    while (idx < 32 && counts[idx] == 0) {
                         res++;
+                        idx++;
                     }
-                    counts[idx]--;
+                    if (idx < 32)
+                        counts[idx]--;
                     continue;
                 }
             }
