@@ -1,13 +1,17 @@
-import java.util.*;
-
 /*
- * Question Link -> https://leetcode.com/problems/next-greater-element-i/
+ * https://leetcode.com/problems/next-greater-element-i/
 */
 
 
 
+/*
+ * Can refer to Striver's video and also to LC Official Editorial Approach 3!
+ */
+
+
+
 // Brute Force
-class Solution1 {
+class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         int n1 = nums1.length, i, j = 0, n2 = nums2.length;
 		int[] result = new int[n1];
@@ -34,7 +38,7 @@ class Solution1 {
 
 
 // Monotonic Stack
-class Solution2 {
+class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         /*
 		 * We use a stack to keep a decreasing sub-sequence, whenever  we see 
