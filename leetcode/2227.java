@@ -22,7 +22,7 @@ class Encrypter {
         }
     }
     
-    public String encrypt(String word1) {
+    public String encrypt(String word1) { // word1 is to be encrypted
         StringBuilder sb = new StringBuilder();
         for (char c : word1.toCharArray()) {
             if (!keyToValMap.containsKey(c))
@@ -32,7 +32,7 @@ class Encrypter {
         return sb.toString();
     }
     
-    public int decrypt(String word2) {
+    public int decrypt(String word2) { // word2 is an encrypted string
         return dictStrCounts.getOrDefault(word2, 0);
     }
 }
