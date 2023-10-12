@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.*;
 
 
-public class Main {
+public class Main1 {
 	
 	/*
 	 * DP State :-
