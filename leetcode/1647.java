@@ -10,22 +10,28 @@
  * occur thrice each) - now from the maxCharCount onwards, run a loop and just 
  * simulate the given problem.
  */
-class Solution1 {
+class Solution {
     public int minDeletions(String s) {
-        int[] charCount = new int[26];
-        int maxCharCount = 0;
+        int maxCharCount = 0, res = 0;
+        int[] letterCount = new int[26];
         for (char c : s.toCharArray())
-            maxCharCount = Math.max(maxCharCount, ++charCount[c - 'a']);    
-        int[] alphabetCount = new int[maxCharCount + 1];
+            maxCharCount = Math.max(maxCharCount, ++letterCount[c - 'a']);
+        int[] freqCounts = new int[1 + maxCharCount];
         for (int i = 0; i < 26; i++)
-            alphabetCount[charCount[i]]++;
-        int result = 0;
+            freqCounts[letterCount[i]]++;
         for (int i = maxCharCount; i > 0; i--) {
-            if (alphabetCount[i] <= 1)
+            if (freqCounts[i] <= 1)
                 continue;
-            result += alphabetCount[i] - 1;
-            alphabetCount[i - 1] += alphabetCount[i] - 1;
+            res += freqCounts[i] - 1;
+            freqCounts[i - 1] += freqCounts[i] - 1;
         }
-        return result;
+        return res;
     }
 }
+
+
+
+/*
+ * Approach of Priority Queue from LC Official Editorial!
+ */
+

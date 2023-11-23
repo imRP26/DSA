@@ -1,5 +1,3 @@
-import java.util.*;
-
 /*
  * https://leetcode.com/problems/remove-duplicate-letters/
  */
