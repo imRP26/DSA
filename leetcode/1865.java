@@ -77,7 +77,7 @@ class FindSumPairs {
     }
   }
     
-  public void add(int index, int val) { // O(1)
+  public void add(int index, int val) {
     numCounts.put(nums2[index], numCounts.get(nums2[index]) - 1);
     if (numCounts.get(nums2[index]) == 0) {
       numCounts.remove(nums2[index]);
